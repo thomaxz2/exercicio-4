@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script>
+        function calcular(operacao) {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var resultado = document.getElementById("resultado");
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultado.value = "Valores inválidos!";
+                return;
+            }
+
+            var res;
+            switch (operacao) {
+                case '+':
+                    res = num1 + num2;
+                    break;
+                case '-':
+                    res = num1 - num2;
+                    break;
+                case '*':
+                    res = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        res = "Divisão por zero!";
+                    } else {
+                        res = num1 / num2;
+                    }
+                    break;
+            }
+
+            resultado.value = res;
+        }
+    </script>
+</head>
+<body>
+    <h2>Calculadora</h2>
+    <form>
+        <label for="num1">Primeiro número:</label>
+        <input type="number" id="num1" name="num1"><br><br>
+
+        <label for="num2">Segundo número:</label>
+        <input type="number" id="num2" name="num2"><br><br>
+
+        <button type="button" onclick="calcular('+')">+</button>
+        <button type="button" onclick="calcular('-')">-</button>
+        <button type="button" onclick="calcular('')"></button>
+        <button type="button" onclick="calcular('/')">/</button><br><br>
+
+        <label for="resultado">Resultado:</label>
+        <input type="text" id="resultado" name="resultado" readonly><br><br>
+    </form>
+</body>
+</html>

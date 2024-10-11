@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Imposto de Renda</title>
+    <script>
+        function calcularIR() {
+            var salario = parseFloat(document.getElementById("salario").value);
+            var resultado = document.getElementById("resultado");
+            var ir;
+
+            if (salario <= 1434) {
+                ir = "Isento";
+            } else if (salario > 1434 && salario <= 2150) {
+                ir = "7,5% de IR";
+            } else if (salario > 2150 && salario <= 2866) {
+                ir = "15% de IR";
+            } else if (salario > 2866 && salario <= 3582) {
+                ir = "22,5% de IR";
+            } else {
+                ir = "27,5% de IR";
+            }
+
+            resultado.value = ir;
+        }
+    </script>
+</head>
+<body>
+    <h2>Cálculo de Imposto de Renda</h2>
+    <form>
+        <label for="registro">Registro:</label>
+        <input type="text" id="registro" name="registro"><br><br>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome"><br><br>
+
+        <label for="salario">Salário:</label>
+        <input type="number" id="salario" name="salario"><br><br>
+
+        <button type="button" onclick="calcularIR()">Calcular IR</button><br><br>
+
+        <label for="resultado">Imposto de Renda:</label>
+        <input type="text" id="resultado" name="resultado" readonly><br><br>
+    </form>
+
+    <table border="1">
+        <caption>Faixa Salarial</caption>
+        <tr>
+            <th>Faixa salarial</th>
+            <th>Alíquota</th>
+        </tr>
+        <tr>
+            <td>Até R$ 1.434</td>
+            <td>Isento</td>
+        </tr>
+        <tr>
+            <td>De R$ 1.434 a R$ 2.150</td>
+            <td>7,5%</td>
+        </tr>
+        <tr>
+            <td>De R$ 2.150 a R$ 2.866</td>
+            <td>15%</td>
+        </tr>
+        <tr>
+            <td>De R$ 2.866 a R$ 3.582</td>
+            <td>22,5%</td>
+        </tr>
+        <tr>
+            <td>Acima de R$ 3.582</td>
+            <td>27,5%</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma de Números Inteiros</title>
+    <script>
+        function somaInteiros(n) {
+            let soma = 0;
+            for (let i = 1; i <= n; i++) {
+                soma += i;
+            }
+            return soma;
+        }
+
+        function calcularSoma() {
+            const n = parseInt(document.getElementById("numero").value);
+            if (n < 1) {
+                alert("Por favor, insira um número inteiro positivo.");
+                return;
+            }
+
+            const resultado = somaInteiros(n);
+            document.getElementById("resultado").value = resultado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo da Soma dos Números Inteiros</h1>
+    <form onsubmit="event.preventDefault(); calcularSoma();">
+        <label for="numero">Digite um número inteiro positivo (N):</label>
+        <input type="number" id="numero" required min="1"><br><br>
+        <label for="resultado">Soma:</label>
+        <input type="text" id="resultado" readonly><br><br>
+        <input type="submit" value="Calcular Soma">
+    </form>
+</body>
+</html>

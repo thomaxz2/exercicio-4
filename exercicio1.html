@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Parcelas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label { display: block; margin: 10px 0 5px; }
+        input[type="number"], button { width: 100%; padding: 10px; margin-top: 10px; }
+        .resultado { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Cálculo de Parcelas</h1>
+    
+    <label for="valor">Valor Total da Compra:</label>
+    <input type="number" id="valor" placeholder="Informe o valor total" />
+
+    <label for="parcelas">Quantidade de Parcelas (1, 3, 7):</label>
+    <input type="number" id="parcelas" placeholder="Informe a quantidade de parcelas" />
+
+    <button onclick="calcularParcelas()">Calcular Parcela</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+        function calcularParcelas() {
+            const valorTotal = parseFloat(document.getElementById('valor').value);
+            const parcelas = parseInt(document.getElementById('parcelas').value);
+            let taxaJuros;
+
+            // Tabela de juros
+            if (parcelas === 1) {
+                taxaJuros = 0.0;  // 0% para 1 parcela
+            } else if (parcelas === 3) {
+                taxaJuros = 0.02; // 2% para 3 parcelas
+            } else if (parcelas === 7) {
+                taxaJuros = 0.04; // 4% para 7 parcelas
+            } else {
+                document.getElementById('resultado').innerText = "Número de parcelas inválido! Escolha entre 1, 3 ou 7.";
+                return;
+            }
+
+            // Verifica se valorTotal é um número válido
+            if (isNaN(valorTotal) || valorTotal <= 0) {
+                document.getElementById('resultado').innerText = "Por favor, insira um valor total válido.";
+                return;
+            }
+
+            const montante = valorTotal * (1 + taxaJuros); // Calcula o montante total
+            const valorParcela = montante / parcelas; // Divide pelo número de parcelas
+
+            document.getElementById('resultado').innerText = `O valor de cada parcela será: R$ ${valorParcela.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
+

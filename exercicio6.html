@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Preço do Produto</title>
+    <script>
+        function calcularPreco() {
+            // Obtendo o valor do produto e a condição de pagamento
+            const preco = parseFloat(document.getElementById("preco").value);
+            const pagamento = parseInt(document.getElementById("pagamento").value);
+            let valorFinal = 0;
+            let mensagem = "";
+
+            // Calculando o valor final com base na condição de pagamento
+            switch (pagamento) {
+                case 1: // À vista 10% de desconto
+                    valorFinal = preco * 0.90;
+                    mensagem = "Condição de pagamento: À vista (10% de desconto)";
+                    break;
+                case 2: // Cartão 5% de desconto
+                    valorFinal = preco * 0.95;
+                    mensagem = "Condição de pagamento: Cartão (5% de desconto)";
+                    break;
+                case 3: // Parcelado 10% de aumento
+                    valorFinal = preco * 1.10;
+                    mensagem = "Condição de pagamento: Parcelado (10% de aumento)";
+                    break;
+                default:
+                    mensagem = "Condição de pagamento inválida.";
+                    valorFinal = null;
+            }
+
+            // Exibindo o resultado
+            if (valorFinal !== null) {
+                document.getElementById("resultado").value = `Valor real do produto: R$ ${preco.toFixed(2)}\n${mensagem}\nValor a ser pago: R$ ${valorFinal.toFixed(2)}`;
+            } else {
+                document.getElementById("resultado").value = mensagem;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo de Preço do Produto</h1>
+    <form onsubmit="event.preventDefault(); calcularPreco();">
+        <label for="preco">Preço do Produto:</label>
+        <input type="number" id="preco" required step="any"><br><br>
+        <label for="pagamento">Condição de Pagamento:</label>
+        <select id="pagamento" required>
+            <option value="1">À vista (10% de desconto)</option>
+            <option value="2">Cartão (5% de desconto)</option>
+            <option value="3">Parcelado (10% de aumento)</option>
+        </select><br><br>
+        <input type="submit" value="Calcular Preço">
+    </form>
+    <br>
+    <label for="resultado">Resultado:</label><br>
+    <textarea id="resultado" rows="6" cols="50" readonly></textarea>
+</body>
+</html>

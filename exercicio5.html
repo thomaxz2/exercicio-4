@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo da Média e Conceito</title>
+    <script>
+        function calcularMedia() {
+            // Obtendo as notas dos campos de texto
+            const nota1 = parseFloat(document.getElementById("nota1").value);
+            const nota2 = parseFloat(document.getElementById("nota2").value);
+            const nota3 = parseFloat(document.getElementById("nota3").value);
+            let resultado = "";
+            let conceito = "";
+
+            // Calculando a média
+            const media = (nota1 + nota2 + nota3) / 3;
+
+            // Definindo o conceito com base na média
+            if (media >= 6) {
+                conceito = "Aprovado";
+            } else if (media >= 3) {
+                conceito = "Exame";
+            } else {
+                conceito = "Reprovado";
+            }
+
+            // Preparando o resultado
+            resultado = `Média: ${media.toFixed(2)}\nConceito: ${conceito}`;
+
+            // Exibindo o resultado no campo de texto
+            document.getElementById("resultado").value = resultado;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo da Média e Conceito do Aluno</h1>
+    <form onsubmit="event.preventDefault(); calcularMedia();">
+        <label for="nota1">Nota 1:</label>
+        <input type="number" id="nota1" required step="any"><br><br>
+        <label for="nota2">Nota 2:</label>
+        <input type="number" id="nota2" required step="any"><br><br>
+        <label for="nota3">Nota 3:</label>
+        <input type="number" id="nota3" required step="any"><br><br>
+        <input type="submit" value="Calcular Média">
+    </form>
+    <br>
+    <label for="resultado">Resultado:</label><br>
+    <textarea id="resultado" rows="4" cols="50" readonly></textarea>
+</body>
+</html>

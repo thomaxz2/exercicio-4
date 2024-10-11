@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo do IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .resultado {
+            color: blue;
+            font-size: 24pt;
+        }
+    </style>
+    <script>
+        function calcularIMC() {
+            // Obtendo os valores do formulário
+            const peso = parseFloat(document.getElementById("peso").value);
+            const altura = parseFloat(document.getElementById("altura").value);
+            const sexo = document.querySelector('input[name="sexo"]:checked').value;
+            let imc = peso / (altura * altura);
+            let categoria = "";
+
+            // Determinando a categoria com base no IMC e sexo
+            if (sexo === "masculino") {
+                if (imc < 20.7) {
+                    categoria = "Abaixo do peso";
+                } else if (imc >= 20.7 && imc < 26.4) {
+                    categoria = "No peso normal";
+                } else if (imc >= 26.4 && imc < 27.8) {
+                    categoria = "Marginalmente acima do peso";
+                } else if (imc >= 27.8 && imc < 31.1) {
+                    categoria = "Acima do peso ideal";
+                } else {
+                    categoria = "Obeso";
+                }
+            } else {
+                if (imc < 19.1) {
+                    categoria = "Abaixo do peso";
+                } else if (imc >= 19.1 && imc < 25.8) {
+                    categoria = "No peso normal";
+                } else if (imc >= 25.8 && imc < 27.3) {
+                    categoria = "Marginalmente acima do peso";
+                } else if (imc >= 27.3 && imc < 32.3) {
+                    categoria = "Acima do peso ideal";
+                } else {
+                    categoria = "Obeso";
+                }
+            }
+
+            // Exibindo o resultado
+            document.getElementById("resultado").innerHTML = `
+                IMC: ${imc.toFixed(2)}<br>
+                Categoria: ${categoria}
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Cálculo do IMC</h1>
+    <form onsubmit="event.preventDefault(); calcularIMC();">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" required step="any"><br><br>
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" required step="any"><br><br>
+        <label>Sexo:</label><br>
+        <input type="radio" name="sexo" value="masculino" required> Masculino<br>
+        <input type="radio" name="sexo" value="feminino" required> Feminino<br><br>
+        <input type="submit" value="Calcular IMC">
+    </form>
+    <br>
+    <div class="resultado" id="resultado"></div>
+</body>
+</html>
